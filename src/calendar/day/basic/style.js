@@ -1,7 +1,8 @@
-import {StyleSheet, Platform} from 'react-native';
+import {StyleSheet, Platform, Dimensions} from 'react-native';
 import * as defaultStyle from '../../../style';
 
 const STYLESHEET_ID = 'stylesheet.day.basic';
+const { width, height } = Dimensions.get('window');
 
 export default function styleConstructor(theme={}) {
   const appStyle = {...defaultStyle, ...theme};
@@ -36,9 +37,9 @@ export default function styleConstructor(theme={}) {
       color: appStyle.textDisabledColor
     },
     dot: {
-      width: 4,
+      width: (width / 7) + 8,
       height: 4,
-      marginTop: 1,
+      marginTop: 5,
       borderRadius: 2,
       opacity: 0
     },
@@ -48,6 +49,17 @@ export default function styleConstructor(theme={}) {
     },
     selectedDot: {
       backgroundColor: appStyle.selectedDotColor
+    },
+    start: {
+      width: (width / 14) + 4,
+      marginLeft: (width / 14)
+    },
+    end: {
+      width: (width / 14) + 4,
+      marginRight: (width / 14)
+    },
+    single: {
+      width: 4,
     },
     ...(theme[STYLESHEET_ID] || {})
   });

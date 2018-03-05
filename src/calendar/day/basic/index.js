@@ -61,14 +61,22 @@ class Day extends Component {
   render() {
     const containerStyle = [this.style.base];
     const textStyle = [this.style.text];
-    const dotStyle = [this.style.dot];
 
     let marking = this.props.marking || {};
+
+    const dotStyle = [
+      this.style.dot,
+      (marking.start && !marking.end) ? this.style.start : {},
+      (!marking.start && marking.end) ? this.style.end : {},
+      (marking.start && marking.end) ? this.style.single : {},
+    ];
+
     if (marking && marking.constructor === Array && marking.length) {
       marking = {
         marking: true
       };
     }
+
     const isDisabled = typeof marking.disabled !== 'undefined' ? marking.disabled : this.props.state === 'disabled';
     let dot;
     if (marking.marked) {
