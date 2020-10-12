@@ -53,7 +53,7 @@ class CalendarList extends Component {
     /** A custom key extractor for the generated calendar months */
     keyExtractor: PropTypes.func,
     /** spreaded into flat list */
-    flatListProps: any
+    flatListProps: PropTypes.any
   }
 
   static defaultProps = {
@@ -324,7 +324,7 @@ class CalendarList extends Component {
           onEndReachedThreshold={this.props.onEndReachedThreshold}
           onEndReached={this.props.onEndReached}
           keyboardShouldPersistTaps={this.props.keyboardShouldPersistTaps}
-          {...this.props.flatListProps}
+          {...(this.props.flatListProps || {})}
         />
         {this.renderStaticHeader()}
       </View>
