@@ -51,7 +51,9 @@ class CalendarList extends Component {
     /** Whether to use static header that will not scroll with the list (horizontal only) */
     staticHeader: PropTypes.bool,
     /** A custom key extractor for the generated calendar months */
-    keyExtractor: PropTypes.func
+    keyExtractor: PropTypes.func,
+    /** spreaded into flat list */
+    flatListProps: any
   }
 
   static defaultProps = {
@@ -322,6 +324,7 @@ class CalendarList extends Component {
           onEndReachedThreshold={this.props.onEndReachedThreshold}
           onEndReached={this.props.onEndReached}
           keyboardShouldPersistTaps={this.props.keyboardShouldPersistTaps}
+          {...this.props.flatListProps}
         />
         {this.renderStaticHeader()}
       </View>
