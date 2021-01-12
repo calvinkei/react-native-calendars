@@ -69,6 +69,8 @@ class CalendarList extends Component {
     keyExtractor: (item, index) => String(index)
   }
 
+  disabledViewableItemsChange = false
+
   constructor(props) {
     super(props);
 
@@ -198,9 +200,10 @@ class CalendarList extends Component {
         visibleMonths.push(xdateToData(val));
       }
     }
-
-    if (this.props.onVisibleMonthsChange) {
+    if (this.props.onVisibleMonthsChange && !this.disabledViewableItemsChange) {
       this.props.onVisibleMonthsChange(visibleMonths);
+    } else {
+      this.disabledViewableItemsChange = false
     }
 
     this.setState({
@@ -236,6 +239,7 @@ class CalendarList extends Component {
   }
 
   addMonth = (count) => {
+    this.disabledViewableItemsChange = true
     this.updateMonth(this.state.currentMonth.clone().addMonths(count, true));
   }
 
@@ -254,7 +258,7 @@ class CalendarList extends Component {
         if (this.props.onMonthChange) {
           this.props.onMonthChange(xdateToData(currMont));
         }
-        if (this.props.onVisibleMonthsChange) {
+        if (this.props.onVisibleMonthsChange && !this.disabledViewableItemsChange) {
           this.props.onVisibleMonthsChange([xdateToData(currMont)]);
         }
       }
